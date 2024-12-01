@@ -1,42 +1,103 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const calculateBtn = document.getElementById('calculate-btn');
-    const principalInput = document.getElementById('principal');
-    const rateInput = document.getElementById('rate');
-    const timeInput = document.getElementById('time');
-    const resultDiv = document.getElementById('result');
+document.addEventListener("DOMContentLoaded", function () {
+  // Input Elements
+  const principalInput = document.getElementById("principal");
+  const rateInput = document.getElementById("rate");
+  const timeInput = document.getElementById("time");
+  const timeUnitInput = document.getElementById("timeUnit");
+  const maturityAmountDiv = document.getElementById("maturityAmount");
+  const totalInterestDiv = document.getElementById("totalInterest");
+  const calculateBtn = document.getElementById("calculate-btn");
 
-    calculateBtn.addEventListener('click', function() {
-        const principal = parseFloat(principalInput.value);
-        const rate = parseFloat(rateInput.value);
-        const time = parseFloat(timeInput.value);
+  // Chart variable
+  let fdChart = null;
 
-        if (isNaN(principal) || isNaN(rate) || isNaN(time)) {
-            resultDiv.textContent = 'Please enter valid numbers';
-            return;
-        }
+  // Add Event Listener to Calculate Button
+  calculateBtn.addEventListener("click", function () {
+    calculateFD();
+  });
 
-        // Calculate FD maturity amount
-        const interest = (principal * rate * time) / 100;
-        const maturityAmount = principal + interest;
+  // Fixed Deposit Calculator
+  function calculateFD() {
+    const principal = parseFloat(principalInput.value);
+    const rate = parseFloat(rateInput.value);
+    const time = parseFloat(timeInput.value);
+    const timeUnit = timeUnitInput.value;
 
-        resultDiv.innerHTML = `
-            <div class="mt-4 p-4 bg-green-50 rounded-lg">
-                <p class="text-lg font-semibold text-green-800">Maturity Details:</p>
-                <div class="mt-2">
-                    <p class="text-gray-700">Principal Amount: ₹${principal.toFixed(2)}</p>
-                    <p class="text-gray-700">Interest Earned: ₹${interest.toFixed(2)}</p>
-                    <p class="text-green-700 font-semibold">Maturity Amount: ₹${maturityAmount.toFixed(2)}</p>
-                </div>
-            </div>
-        `;
+    // Validation for empty or invalid inputs
+    if (
+      isNaN(principal) ||
+      isNaN(rate) ||
+      isNaN(time) ||
+      principal <= 0 ||
+      rate <= 0 ||
+      time <= 0
+    ) {
+      alert("Please enter valid and positive numbers");
+      return;
+    }
+
+    // Convert time to years for calculation
+    let timeInYears = time;
+    if (timeUnit === "months") {
+      timeInYears = time / 12;
+    } else if (timeUnit === "days") {
+      timeInYears = time / 365;
+    }
+
+    // Calculate FD maturity amount
+    const interest = (principal * rate * timeInYears) / 100;
+    const maturityAmount = principal + interest;
+
+    // Update results in the UI
+    maturityAmountDiv.textContent = "₹" + maturityAmount.toFixed(2);
+    totalInterestDiv.textContent = "₹" + interest.toFixed(2);
+
+    // Update the chart
+    updateChart(principal, interest);
+  }
+
+  // Chart Update Function
+  function updateChart(principal, interest) {
+    const ctx = document.getElementById("fdChart").getContext("2d");
+
+    // Destroy the existing chart instance if it exists
+    if (fdChart) {
+      fdChart.destroy();
+    }
+
+    // Create a new chart instance
+    fdChart = new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: ["Principal Amount", "Interest Earned"],
+        datasets: [
+          {
+            data: [principal, interest],
+            backgroundColor: [
+              "rgb(59, 130, 246)", // blue-500
+              "rgb(22, 163, 74)", // green-600
+            ],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: "bottom",
+          },
+        },
+      },
     });
+  }
 
-    // Input validation
-    [principalInput, rateInput, timeInput].forEach(input => {
-        input.addEventListener('input', function() {
-            if (this.value < 0) {
-                this.value = 0;
-            }
-        });
+  // Input Validation to Prevent Negative Values
+  [principalInput, rateInput, timeInput].forEach((input) => {
+    input.addEventListener("input", function () {
+      if (this.value < 0) {
+        this.value = 0;
+      }
     });
+  });
 });
