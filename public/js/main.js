@@ -1,9 +1,9 @@
 // Mobile menu functionality
 document.addEventListener('DOMContentLoaded', function() {
-    const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileMenuIcon = document.getElementById('mobile-menu-icon');
-    const closeMenuIcon = document.getElementById('close-menu-icon');
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileMenuIcon = document.getElementById('mobileMenuIcon');
+    const closeMenuIcon = document.getElementById('closeMenuIcon');
 
     if (mobileMenuButton) {
         mobileMenuButton.addEventListener('click', function() {
@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Profile dropdown functionality
     const profileButton = document.getElementById('user-menu-button');
-    const profileDropdown = document.getElementById('user-menu-dropdown');
+    const profileDropdown = document.getElementById('profileMenu');
 
     if (profileButton) {
         profileButton.addEventListener('click', function() {
