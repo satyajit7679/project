@@ -16,15 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-<<<<<<< HEAD
     // Profile dropdown functionality
     const profileButton = document.getElementById('profileButton');
     const profileDropdown = document.getElementById('profileMenu');
-=======
-  // Profile dropdown functionality
-  const profileButton = document.getElementById("userMenuButton");
-  const profileDropdown = document.getElementById("profileMenu");
->>>>>>> e4cdb9597666d01989ccbb80fe148efc64b017b8
 
   if (profileButton) {
     profileButton.addEventListener("click", function () {
