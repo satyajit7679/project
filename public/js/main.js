@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Profile dropdown functionality
-    const profileButton = document.getElementById('user-menu-button');
+    const profileButton = document.getElementById('profileButton');
     const profileDropdown = document.getElementById('profileMenu');
 
     if (profileButton) {
