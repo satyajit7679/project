@@ -6,13 +6,142 @@
     <title>Explore Fixed Deposits</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link
+    href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+    rel="stylesheet"
+  />
+
 </head>
 <body class="bg-gray-50">
-    <!-- Header Section -->
-    <div class="bg-gradient-to-r from-blue-600 to-blue-400 py-16 mb-10">
+
+
+    <header class="bg-white shadow-lg fixed w-full">
+        <nav class="bg-white shadow-lg">
+          <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+              <!-- Left side: Logo and Navigation -->
+              <div class="flex items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                  <div class="text-blue-600 font-bold text-2xl">FD Manager</div>
+                </div>
+  
+                <!-- Desktop Navigation Links -->
+                <div class="hidden md:flex ml-10 space-x-8">
+
+                    <a
+                    href="index.html"
+                    class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md font-medium"
+                    >Home</a
+                  >
+ 
+                  <a
+                    href="#"
+                    class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md font-medium"
+                    >Dashboard</a
+                  >
+                  <!-- <a href="fd-calculator.html" class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md font-medium">FD Calculator</a>
+                          <a href="rd-calculator.html" class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md font-medium">RD Calculator</a> -->
+                          <a href="explore.html" class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md font-medium">Explore</a>
+                          <a href="#" class="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md font-medium">Explore FDs</a>
+                      </div>
+                  </div>
+  
+                  <!-- Right side: Search, Notifications, and Profile -->
+                  <div class="flex items-center space-x-4">
+                      <!-- Search Bar - Desktop -->
+                      <div class="hidden md:block ">
+                          <div class="relative">
+                              <input type="text" class="bg-gray-100 rounded-lg pl-10 pr-4 py-2 w-64 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Search...">
+                              <div class="absolute left-3 top-2.5">
+                                  <i class="bx bx-search text-gray-400"></i>
+                              </div>
+                          </div>
+                      </div>
+  
+                      <!-- Mobile Search Button -->
+                      <button id="searchButton" class="md:hidden p-2 rounded-full hover:bg-gray-100 hidden">
+                          <i class="bx bx-search text-2xl text-gray-600"></i>
+                      </button>
+  
+                      <!-- Notifications -->
+                      <button class="p-2 rounded-full hover:bg-gray-100 relative">
+                          <i class="bx bx-bell text-2xl text-gray-600"></i>
+                          <span class="absolute top-0 right-0 block h-2 w-2 rounded-full bg-red-500"></span>
+                      </button>
+  
+                      <!-- Profile -->
+                      <div class="relative">
+                          <button id="profileButton" onclick="toggleProfileMenu()" class="flex items-center space-x-2 focus:outline-none">
+                              <img class="h-8 w-8 rounded-full bg-gray-300" src="https://img.freepik.com/free-vector/professional-tiktok-profile-picture_742173-5866.jpg?t=st=1733145354~exp=1733148954~hmac=3768783f7c1d50394c2358dc95c5879f1c7725018e7237bbd24f782113347730&w=900" alt="Profile">
+                              <span class="hidden md:block text-gray-700">John Doe</span>
+                          </button>
+                          <!-- Profile Dropdown -->
+                          <div id="profileMenu" class="hidden absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5">
+                              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your Profile</a>
+                              <a href="settings.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+                              <a href="login.html" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
+                          </div>
+                      </div>
+  
+                      <!-- Mobile Menu Button -->
+                      <button id="mobileMenuButton" class="md:hidden p-2 rounded-full hover:bg-gray-100" onclick="toggleMobileMenu()">
+                          <i id="mobileMenuIcon" class="bx bx-menu text-2xl text-gray-600"></i>
+                          <i id="closeMenuIcon"  class= "bx bx-x text-2xl text-gray-600 hidden"></i>
+                      </button>
+                  </div>
+              </div>
+  
+          </div>
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="hidden md:hidden pb-4">
+              <!-- Mobile Search -->
+              <div class="px-2 pt-2 pb-3">
+                <div class="relative">
+                  <input
+                    type="text"
+                    class="w-full bg-gray-100 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    placeholder="Search..."
+                  />
+                  <div class="absolute left-3 top-2.5">
+                    <i class="bx bx-search text-2xl text-gray-400"></i>
+                  </div>
+                </div>
+              </div>
+              <!-- Mobile Navigation Links -->
+              <div class="px-2 pt-2 pb-3 space-y-1">
+                <a
+                href="index.html"
+                class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-gray-50"
+                >Home</a
+              >
+
+                <a
+                  href="dashboard.html"
+                  class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-gray-50"
+                  >Dashboard</a
+                >
+                <!-- <a href="fd-calculator.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-gray-50">FD Calculator</a>
+                      <a href="rd-calculator.html" class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-gray-50">RD Calculator</a> -->
+                <a
+                  href="explore.html"
+                  class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-gray-50"
+                  >Explore</a
+                >
+                <a
+                  href="#"
+                  class="block px-3 py-2 rounded-md text-base font-medium text-gray-900 hover:text-blue-600 hover:bg-gray-50"
+                  >Explore FDs</a
+                >
+              </div>
+            </div>
+          </div>
+        </nav>
+      </header>
+    <div class="bg-gradient-to-r from-blue-600 to-blue-400 py-16 mb-8">
         <div class="container mx-auto px-4">
             <h1 class="text-4xl font-bold text-center text-white mb-4">Explore Fixed Deposits</h1>
-            <p class="text-xl text-center text-white opacity-90">Compare different types of fixed deposits and choose the best one for you</p>
+            <p class="text-xl text-center text-white opacity-1">Compare different types of fixed deposits and choose the best one for you</p>
         </div>
     </div>
 
@@ -173,6 +302,7 @@
     </div>
 
     <!-- Script imports -->
+    <script src="js/main.js"></script>
     <script src="js/explore.js"></script>
 </body>
 </html>
